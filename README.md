@@ -66,11 +66,12 @@ block 16793994 （Estimated Target Date: Fri Mar 10 2023 11:23:43 GMT+0900 (日�
 
     [2] [{address: 0xa..., timestamp: 167..., blockNumber: yyyyyyy}, {address: 0xb..., timestamp: 167..., blockNumber: yyyyyyy}]
 
-map の key で持つ 1, 2 というのを blockNumber 上から計算させれば良い。
+map の key で持つ 1, 2 というのを blockNumber 上から計算させれば良い。（value にあたるデータは適当です。）
 
-例えば 現 blockNumber が 16,145,994 とする。
-
+例えば 現 blockNumber が 16,145,994 で（このブロックを constructor 時に genesisBlockNumber とする。)
 仮に 1000 ブロック分を 1 先着期間とする。
+
+以下が今後の BlockNumber の範囲に該当する Round
 
     16145994 ~ 16146993 = 1
     16146994 ~ 16147993 = 2
@@ -78,19 +79,18 @@ map の key で持つ 1, 2 というのを blockNumber 上から計算させれ�
     16148994 ~ 16149993 = 4
     16149994 ~ 16150993 = 5
 
-初期化時に genesisBlockNumber が取れるので、そこから 1000 区切りで map の key を生成できれば OK。→ currentRound として関数にしたほうが良い。
-
-式: (period は先着期間)
+このときの Round の算出式: (period は先着期間)
 
     pastBlock = blockNumber - genesisBlockNumber
-    round = ( pastBlock / period ) + 1
+    Round = ( pastBlock / period ) + 1
+    ※最終的に Round は切り捨てられる。
 
 ex:
-
-    現 blockNumber が 16,150,993 とする、genesis は 16,145,994
+現 blockNumber が 16,150,993 とする、genesis は 16,145,994
 
     pastBlock = 16150993 - 16145994 = 4999
-
     round = ( 4999 / 1000 ) + 1 = 5.999
+    ↓ uint なので小数点以下切り捨て
+    round = 5
 
 blockNumber に関しては Tx のタイミングで算出。

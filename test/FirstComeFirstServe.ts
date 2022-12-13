@@ -104,6 +104,7 @@ describe('FirstComeFirstServed', async () => {
     expect(JSON.stringify(entriedAddresses)).to.be.equal(JSON.stringify([accounts[1].address]));
 
     await mine(1000); // round 5
+    console.log(await contract.getBlockNumber());
     expect(await contract.getCurrentRound()).to.be.equal(5);
   });
 });
