@@ -9,12 +9,14 @@ contract FirstComeFirstServed {
     event UpdatePeriodBlockNumber(uint256, uint256); // old, new
     event UpdateMaximumEntries(uint256, uint256); // old, new
 
-    // 各期間における先着順の枠
-    uint256 public maximumEntries = 5;
-    // 各先着期間のブロック番号（本来は1000とか）
-    uint256 public periodBlockNumber = 1000;
     // 期間の計算に必要な初期データ
     uint256 public immutable GENESIS_BLOCK_NUMBER;
+
+    // 各期間における先着順の枠（Txによる更新可能）
+    uint256 public maximumEntries = 5;
+    // 各先着期間のブロック番号（Txによる更新可能）
+    // 更新不可が望ましかったが、Polkadot系だとブロック生成時間が短縮されたときに変更できるようにする。
+    uint256 public periodBlockNumber = 1000;
 
     address payable owner;
 
