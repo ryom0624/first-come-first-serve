@@ -4,11 +4,15 @@ pragma solidity ^0.8.9;
 contract FirstComeFirstServed {
     event Entry(address addr, uint256 indexed round, uint256 blockNumber, uint40 timestamp);
     event LockEther(uint256 num);
+    event Withdraw(address distination, uint256 amount);
+    event ChangeOwner(address, address); // old, new
+    event UpdatePeriodBlockNumber(uint256, uint256); // old, new
+    event UpdateMaximumEntries(uint256, uint256); // old, new
 
     // 各期間における先着順の枠
-    uint256 maximumEntries = 5;
+    uint256 public maximumEntries = 5;
     // 各先着期間のブロック番号（本来は1000とか）
-    uint256 public constant PERIOD_BLOCK_NUMBER = 1000;
+    uint256 public periodBlockNumber = 1000;
     // 期間の計算に必要な初期データ
     uint256 public immutable GENESIS_BLOCK_NUMBER;
 
@@ -51,7 +55,7 @@ contract FirstComeFirstServed {
 
     function getCurrentRound() public view returns (uint256) {
         uint256 pastBlock = block.number - GENESIS_BLOCK_NUMBER;
-        uint256 round = (pastBlock / PERIOD_BLOCK_NUMBER) + 1;
+        uint256 round = (pastBlock / periodBlockNumber) + 1;
         return round;
     }
 
@@ -76,18 +80,30 @@ contract FirstComeFirstServed {
     */
     function setMaximumEntries(uint256 _newMaximumEntries) external {
         require(owner == msg.sender, "only Owner");
+        uint256 old = maximumEntries;
         maximumEntries = _newMaximumEntries;
+        emit UpdateMaximumEntries(old, _newMaximumEntries);
+    }
+
+    function setPeriodBlockNumber(uint256 _newPeriodBlockNumber) external {
+        require(owner == msg.sender, "only Owner");
+        uint256 old = periodBlockNumber;
+        periodBlockNumber = _newPeriodBlockNumber;
+        emit UpdatePeriodBlockNumber(old, _newPeriodBlockNumber);
     }
 
     function setOwner(address _newOwner) external {
         require(owner == msg.sender, "only Owner");
+        address old = owner;
         owner = payable(_newOwner);
+        emit ChangeOwner(old, _newOwner);
     }
 
     function withdraw(uint256 _value) external {
         require(owner == msg.sender, "only Owner");
         require(address(this).balance > _value, "insufficient balance");
         owner.transfer(_value);
+        emit Withdraw(owner, _value);
     }
 
     receive() external payable {
