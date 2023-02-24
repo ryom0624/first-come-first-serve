@@ -1,0 +1,5 @@
+{
+  "filter_paths": "(contracts/test/|node_modules/)",
+  "hardhat_artifacts_directory": "artifacts",
+  "foundry_out_directory": "artifacts"
+}
