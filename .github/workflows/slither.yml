@@ -27,9 +27,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Compile and check dir
-      - run: npx hardhat compile; ls -la
-
       - name: Run Slither
         uses: crytic/slither-action@v0.3.0
         id: slither
