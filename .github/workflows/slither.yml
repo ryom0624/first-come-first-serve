@@ -7,8 +7,9 @@ on:
       - master
       - development
     paths:
-      - "src/**"
+      - "contracts/**"
       - ".github/workflows/slither.yml"
+      - "slither.config.json"
   pull_request:
     branches:
       - "*"
