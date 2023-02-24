@@ -15,6 +15,8 @@ on:
       - "*"
     paths:
       - "contracts/**"
+      - ".github/workflows/slither.yml"
+      - "slither.config.json"
 
 jobs:
   slither:
