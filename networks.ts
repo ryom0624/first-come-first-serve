@@ -10,11 +10,11 @@ const networks: NetworksUserConfig = {};
 //   url: process.env.ALCHEMY_RINKEBY_RPC_URL,
 //   accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
 // };
-networks.goerli = {
-  chainId: 5,
-  url: process.env.ALCHEMY_GOERLI_RPC_URL,
-  accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-};
+// networks.goerli = {
+//   chainId: 5,
+//   url: process.env.ALCHEMY_GOERLI_RPC_URL,
+//   accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+// };
 networks.hardhat = {
   chainId: 31337,
   forking: {
