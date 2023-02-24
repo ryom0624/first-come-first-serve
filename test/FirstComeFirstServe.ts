@@ -4,7 +4,7 @@ import { ethers, deployments, network } from 'hardhat';
 import { mine } from '@nomicfoundation/hardhat-network-helpers';
 
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import { FirstComeFirstServed } from '../typechain-types';
+import { FirstComeFirstServed } from '../typechain';
 
 import { getBalanceETH, getCurrentBlockNumber, takeChainSnapshot } from '../utils/hardhat-test-util';
 

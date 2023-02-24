@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract FirstComeFirstServed {
+contract FirstComeFirstServedLottery {
     event Entry(address addr, uint256 indexed round, uint256 blockNumber, uint40 timestamp);
     event LockEther(uint256 num);
 
