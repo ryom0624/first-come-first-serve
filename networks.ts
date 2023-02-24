@@ -17,10 +17,10 @@ const networks: NetworksUserConfig = {};
 // };
 networks.hardhat = {
   chainId: 31337,
-  forking: {
-    url: process.env.ALCHEMY_MAINNET_RPC_URL ? process.env.ALCHEMY_MAINNET_RPC_URL : '',
-    blockNumber: 16145994,
-  },
+  // forking: {
+  //   url: process.env.ALCHEMY_MAINNET_RPC_URL ? process.env.ALCHEMY_MAINNET_RPC_URL : '',
+  //   blockNumber: 16145994,
+  // },
 };
 
 export default networks;
