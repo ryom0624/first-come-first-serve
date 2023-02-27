@@ -15,13 +15,15 @@ on:
       - "*"
     paths:
       - "contracts/**"
+      - ".github/workflows/slither.yml"
+      - "slither.config.json"
 
 jobs:
   slither:
     runs-on: ubuntu-latest
     permissions:
       actions: read
-      contents: read
+      contents: write
       security-events: write
     steps:
       - name: Checkout repository

@@ -3,7 +3,7 @@ module.exports = async ({ github, context, header }) => {
   const body = await fs.readFile("/tmp/result.txt", "utf8");
 
   const comment = [header, body].join("\n");
-  console.log("comment length: ", comment.length);
+  console.log("comment length:  ", comment.length);
 
   const { data: comments } = await github.rest.issues.listComments({
     owner: context.repo.owner,
